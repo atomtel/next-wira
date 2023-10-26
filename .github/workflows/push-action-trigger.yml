@@ -6,6 +6,9 @@ jobs:
   deploy:
     name: "Deploy to docker"
     runs-on: ubuntu-latest
+    environment : Docker-Staging
+    env:
+      SSH_KEY: ${{ secrets.DOCKER_SSH_KEY }}
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     # needs: test
     steps:
@@ -16,15 +19,11 @@ jobs:
           chmod 600 ~/.ssh/docker.key
           cat >>~/.ssh/config <<END
           Host docker
-            HostName $SSH_HOST
-            User $SSH_USER
+            HostName 45.119.160.27
+            User atom
             IdentityFile ~/.ssh/docker.key
             StrictHostKeyChecking no
           END
-        env:
-          SSH_USER: ${{ secrets.DOCKER_SSH_USER }}
-          SSH_KEY: ${{ secrets.DOCKER_SSH_KEY }}
-          SSH_HOST: ${{ secrets.DOCKER_SSH_HOST }}
       - name: Pull changes from the server
         run: ssh atom@45.119.160.27 "cd /app/next-project/next-wira && sudo git pull origin main"
       

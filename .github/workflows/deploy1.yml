@@ -8,14 +8,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-        uses: actions/checkout@v3
       - name: Set up SSH key
         run: |
-          mkdir -p ~/.ssh
+          mkdir -p ~/.ssh/
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-    - name: Deploy to server
+      - name: Deploy to server
         run: |
           echo "Starting deployment..."
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no atom@45.119.160.27 "cd /app/next-project/next-wira && git pull origin main"

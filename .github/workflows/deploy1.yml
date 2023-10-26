@@ -16,5 +16,5 @@ jobs:
       - name: Deploy to server
         run: |
           echo "Starting deployment..."
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no atom@45.119.160.27 "cd /app/next-project/next-wira && git pull origin main"
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no atom@45.119.160.27 "cd /app/next-project/next-wira && sudo git pull origin main"
           echo "Deployment completed."

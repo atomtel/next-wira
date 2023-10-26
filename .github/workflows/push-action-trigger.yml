@@ -24,8 +24,6 @@ jobs:
             IdentityFile ~/.ssh/docker.key
             StrictHostKeyChecking no
           END
-        env:
-          SSH_KEY: ${{ secrets.DOCKER_SSH_KEY }}
       - name: Pull changes from the server
         run: ssh atom@45.119.160.27 "cd /app/next-project/next-wira && sudo git pull origin main"
       

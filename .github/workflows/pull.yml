@@ -1,0 +1,17 @@
+name: Auto Pull from Server
+
+on:
+  schedule:
+    - cron: "* * * * *"
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+      
+    - name: Pull changes from the server
+      run: |
+        ssh atom@45.119.160.27 "cd /app/next-project/next-wira && sudo git pull origin main"
